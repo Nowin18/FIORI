@@ -128,7 +128,7 @@
                 },
                 "supp": {
                     "viewName": "Supplier",
-                    "viewID": "supplier"
+                    "viewId": "supplier"
                 },
                 "detailObjectNotFound": {
                     "viewName": "DetailObjectNotFound",

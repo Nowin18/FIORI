@@ -9,7 +9,7 @@
         </headerTitle>
         <headerContent>
             <layout:VerticalLayout>
-                <m:Label text="Adress"/>
+                <m:Label text="Address"/>
             </layout:VerticalLayout>
             <layout:VerticalLayout>
                 <m:Label text="Street"/>
