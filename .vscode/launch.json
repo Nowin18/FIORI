@@ -1,57 +1,83 @@
 {
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "projectv2-config1",
-            "cwd": "${workspaceFolder}",
-            "runtimeArgs": [
-                "fiori",
-                "run"
-            ],
-            "type": "node",
-            "request": "launch",
-            "runtimeExecutable": "npx",
-            "args": [
-                "--open",
-                "index.html"
-            ],
-            "windows": {
-                "runtimeExecutable": "npx.cmd"
-            },
-            "console": "internalConsole",
-            "internalConsoleOptions": "openOnSessionStart",
-            "outputCapture": "std",
-            "env": {
-                "run.config": "{\"handlerId\":\"fiori_tools\",\"runnableId\":\"/home/user/projects/projectv2\"}",
-                "FIORI_TOOLS_BACKEND_CONFIG": "[{\"path\":\"/V2\",\"url\":\"https://services.odata.org\"}]",
-                "FIORI_TOOLS_URL_PARAMS": "sap-ui-xx-viewCache=false"
-            }
-        },
-        {
-            "name": "FIORI-config1",
-            "cwd": "${workspaceFolder}",
-            "runtimeArgs": [
-                "fiori",
-                "run"
-            ],
-            "type": "node",
-            "request": "launch",
-            "runtimeExecutable": "npx",
-            "args": [
-                "--open",
-                "test/flpSandbox.html"
-            ],
-            "windows": {
-                "runtimeExecutable": "npx.cmd"
-            },
-            "console": "internalConsole",
-            "internalConsoleOptions": "openOnSessionStart",
-            "outputCapture": "std",
-            "env": {
-                "run.config": "{\"handlerId\":\"fiori_tools\",\"runnableId\":\"/home/user/projects/FIORI\"}",
-                "FIORI_TOOLS_BACKEND_CONFIG": "[{\"path\":\"/V2\",\"url\":\"https://services.odata.org\"}]",
-                "FIORI_TOOLS_URL_PARAMS": "sap-ui-xx-viewCache=false"
-            }
-        }
-    ]
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "projectv2-config1",
+      "cwd": "${workspaceFolder}",
+      "runtimeArgs": [
+        "fiori",
+        "run"
+      ],
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "npx",
+      "args": [
+        "--open",
+        "index.html"
+      ],
+      "windows": {
+        "runtimeExecutable": "npx.cmd"
+      },
+      "console": "internalConsole",
+      "internalConsoleOptions": "openOnSessionStart",
+      "outputCapture": "std",
+      "env": {
+        "run.config": "{\"handlerId\":\"fiori_tools\",\"runnableId\":\"/home/user/projects/projectv2\"}",
+        "FIORI_TOOLS_BACKEND_CONFIG": "[{\"path\":\"/V2\",\"url\":\"https://services.odata.org\"}]",
+        "FIORI_TOOLS_URL_PARAMS": "sap-ui-xx-viewCache=false"
+      }
+    },
+    {
+      "name": "FIORI-config1",
+      "cwd": "${workspaceFolder}",
+      "runtimeArgs": [
+        "fiori",
+        "run"
+      ],
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "npx",
+      "args": [
+        "--open",
+        "test/flpSandbox.html"
+      ],
+      "windows": {
+        "runtimeExecutable": "npx.cmd"
+      },
+      "console": "internalConsole",
+      "internalConsoleOptions": "openOnSessionStart",
+      "outputCapture": "std",
+      "env": {
+        "run.config": "{\"handlerId\":\"fiori_tools\",\"runnableId\":\"/home/user/projects/FIORI\"}",
+        "FIORI_TOOLS_BACKEND_CONFIG": "[{\"path\":\"/V2\",\"url\":\"https://services.odata.org\"}]",
+        "FIORI_TOOLS_URL_PARAMS": "sap-ui-xx-viewCache=false"
+      }
+    },
+    {
+      "name": "FIORI-config2",
+      "cwd": "${workspaceFolder}",
+      "runtimeArgs": [
+        "fiori",
+        "run"
+      ],
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "npx",
+      "args": [
+        "--open",
+        "index.html"
+      ],
+      "windows": {
+        "runtimeExecutable": "npx.cmd"
+      },
+      "console": "internalConsole",
+      "internalConsoleOptions": "openOnSessionStart",
+      "outputCapture": "std",
+      "env": {
+        "run.config": "{\"handlerId\":\"fiori_tools\",\"runnableId\":\"/home/user/FIORI\"}",
+        "FIORI_TOOLS_BACKEND_CONFIG": "[{\"path\":\"/V2\",\"url\":\"https://services.odata.org\"}]",
+        "FIORI_TOOLS_URL_PARAMS": "sap-ui-xx-viewCache=false"
+      }
+    }
+  ]
 }

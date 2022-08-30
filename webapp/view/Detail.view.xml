@@ -51,7 +51,7 @@
                     </Column>
                 </columns>
                 <items>
-                    <ColumnListItem>
+                    <ColumnListItem press=".handleRowPress" type="Active">
                         <cells>
                             <ObjectIdentifier
                                 title="{Name}"
@@ -61,6 +61,8 @@
                                     path: 'Price',
                                     formatter: '.formatter.currencyValue'
                                 }" />
+                                <Text text="{Description}"></Text>
+                                <Text text="{Rating}"></Text>
                         </cells>
                     </ColumnListItem>
                 </items>
