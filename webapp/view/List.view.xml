@@ -82,6 +82,7 @@
                             press=".onOpenViewSettings"
                             icon="sap-icon://group-2"
                             type="Transparent"/>
+                        
 
                     </OverflowToolbar>
                 </headerToolbar>
@@ -94,6 +95,9 @@
                             path: 'ID',
                             formatter: '.formatter.numberUnit'
                         }" />
+                        <ObjectAttribute active="true" id="deleteId" text="Delete" press=".onDeleteClick"/>
+                        <ObjectAttribute active="true" id="updateId" text="Change name" press=".onUpdateClick"/>
+                    </ObjectListItem>
                 </items>
             </List>
         </semantic:content>

@@ -240,7 +240,26 @@ sap.ui.define([
                 this._showDetail(oEvent.getParameter("listItem") || oEvent.getSource());
             }
         },
+/**
+             @param {sap.ui.base.Event} oEvent the list selectionChange event
+         * @public
+            */
+           onDeleteClick: function(oEvent){
+               const clickedItemPath = oEvent.getSource().getBindingContext().getPatch();
+               var oModel = this.getView().getModel();
 
+               oModel.remove(clickedItemPath, {
+                   success: function(data) {
+                       MessageBox.success("Category has benn DELETED!",{
+                           title: "Success"
+                       })
+                    }, 
+                    error: function(e){
+                        alert("error");
+                    }
+                    
+               });
+           },
         /**
          * Event handler for the bypassed event, which is fired when no routing pattern matched.
          * If there was an object selected in the list, that selection is removed.
