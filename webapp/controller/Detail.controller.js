@@ -43,7 +43,7 @@ sap.ui.define([
             this.getRouter().navTo("supp", {
                 objectId : clickedItem.ID
             })
-        }
+        },
 
         /**
          * Event handler when the share by E-Mail button has been clicked

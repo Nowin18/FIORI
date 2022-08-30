@@ -62,9 +62,9 @@
                                     formatter: '.formatter.currencyValue'
                                 }" />
                                 <Text text="{Description}"></Text>
-                                <Text text="{Rating}"></Text>
+                                <Text text="{Rating}"></Text>                                                     
                         </cells>
-                    </ColumnListItem>
+                    </ColumnListItem>                    
                 </items>
             </Table>
         </semantic:content>
