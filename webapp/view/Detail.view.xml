@@ -7,7 +7,7 @@
     <semantic:SemanticPage
         id="detailPage"
         busy="{detailView>/busy}"
-        busyIndicatorDelay="{detailView>/delay}">
+        busyIndicatorDelay="0">
         <semantic:titleHeading>
             <Title
                 text="{Name}"
@@ -24,12 +24,14 @@
         <semantic:content>
 
             <Table
+                busy="{detailView>/busy}"
+                busyIndicatorDelay="0"
                 id="lineItemsList"
                 width="auto"
                 items="{Products}"
                 updateFinished=".onListUpdateFinished"
                 noDataText="{i18n>detailLineItemTableNoDataText}"
-                busyIndicatorDelay="{detailView>/lineItemTableDelay}">
+            >
                 <headerToolbar>
                     <Toolbar>
                         <Title

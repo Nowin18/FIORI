@@ -2,24 +2,8 @@ sap.ui.define([
     "./BaseController",
     "sap/ui/model/json/JSONModel",
     "../model/formatter",
-    "sap/ui/model/Filter",
-    "sap/ui/model/Sorter",
-    "sap/ui/model/FilterOperator",
-    "sap/m/GroupHeaderListItem",
-    "sap/ui/Device",
-    "sap/ui/core/Fragment",
-    "../model/formatter",
-    "sap/m/Dialog",
-    "sap/m/DialogType", 
-    "sap/m/Button", 
-    "sap/m/ButtonType", 
-    "sap/m/Text", 
-    "sap/m/MessageToast", 
-    "sap/m/MessageBox", 
-    "sap/m/Input",
     "sap/m/library"
-], function (BaseController, JSONModel, formatter, mobileLibrary, Filter, Sorter, FilterOperator, GroupHeaderListItem, Device, Fragment, Dialog, DialogType, Button, ButtonType, Text, MessageToast, MessageBox, Input) {
-
+], function (BaseController, JSONModel, formatter, mobileLibrary) {
     "use strict";
 
     // shortcut for sap.m.URLHelper
@@ -38,18 +22,17 @@ sap.ui.define([
             // detail page is busy indication immediately so there is no break in
             // between the busy indication for loading the view's meta data
             var oViewModel = new JSONModel({
-                busy : false,
+                busy : true,
                 delay : 0,
                 lineItemListTitle : this.getResourceBundle().getText("detailLineItemTableHeading")
             });
 
             this.getRouter().getRoute("object").attachPatternMatched(this._onObjectMatched, this);
 
-            this.setModel(oViewModel, "detailView");
+            this.getView().setModel(oViewModel, "detailView");
 
             this.getOwnerComponent().getModel().metadataLoaded().then(this._onMetadataLoaded.bind(this));
         },
-       
 
         /* =========================================================== */
         /* event handlers                                              */
@@ -59,7 +42,6 @@ sap.ui.define([
          * Event handler when the share by E-Mail button has been clicked
          * @public
          */
-         
         onSendEmailPress: function () {
             var oViewModel = this.getModel("detailView");
 
@@ -76,24 +58,12 @@ sap.ui.define([
          * @param {object} oEvent an event containing the total number of items in the list
          * @private
          */
-        handleRowPress: function(oEvent){
-
-            const clickedItem = oEvent.getSource().getBindingContext().getObject()
-
-            
-
-            this.getRouter().navTo("supp", { 
-
-            objectId : clickedItem.ID
-
-            })
-
-            },
+        
         onListUpdateFinished: function (oEvent) {
             var sTitle,
-                iTotalItems = oEvent.getParameter("total"),
-                oViewModel = this.getModel("detailView");
-
+            iTotalItems = oEvent.getParameter("total"),
+            oViewModel = this.getModel("detailView");
+            
             // only update the counter if the length is final
             if (this.byId("lineItemsList").getBinding("items").isLengthFinal()) {
                 if (iTotalItems) {
@@ -105,7 +75,17 @@ sap.ui.define([
                 oViewModel.setProperty("/lineItemListTitle", sTitle);
             }
         },
-
+        
+        
+        handleRowPress: function(oEvent){
+            this.getModel('detailView').setProperty("/busy", true);
+            debugger;
+            const clickedItem = oEvent.getSource().getBindingContext().getObject()
+        
+            this.getRouter().navTo("supp", {
+                objectId: clickedItem.ID
+            })
+        },
         /* =========================================================== */
         /* begin: internal methods                                     */
         /* =========================================================== */
@@ -116,6 +96,14 @@ sap.ui.define([
          * @param {sap.ui.base.Event} oEvent pattern match event in route 'object'
          * @private
          */
+        /**
+         * Binds the view to the object path. Makes sure that detail view displays
+         * a busy indicator while data for the corresponding element binding is loaded.
+         * @function
+         * @param {string} sObjectPath path to the object to be bound to the view.
+         * @private
+         */
+
         _onObjectMatched: function (oEvent) {
             var sObjectId =  oEvent.getParameter("arguments").objectId;
             this.getModel("appView").setProperty("/layout", "TwoColumnsMidExpanded");
@@ -127,20 +115,11 @@ sap.ui.define([
             }.bind(this));
         },
 
-        /**
-         * Binds the view to the object path. Makes sure that detail view displays
-         * a busy indicator while data for the corresponding element binding is loaded.
-         * @function
-         * @param {string} sObjectPath path to the object to be bound to the view.
-         * @private
-         */
         _bindView: function (sObjectPath) {
             // Set busy indicator during view binding
             var oViewModel = this.getModel("detailView");
-
             // If the view was not bound yet its not busy, only if the binding requests data it is set to busy again
             oViewModel.setProperty("/busy", false);
-
             this.getView().bindElement({
                 path : sObjectPath,
                 events: {
@@ -150,7 +129,11 @@ sap.ui.define([
                     },
                     dataReceived: function () {
                         oViewModel.setProperty("/busy", false);
-                    }
+                    
+                    },
+                parameters : {
+                    expand : "Supplier"
+                }
                 }
             });
         },
@@ -230,6 +213,173 @@ sap.ui.define([
                 // reset to previous layout
                 this.getModel("appView").setProperty("/layout",  this.getModel("appView").getProperty("/previousLayout"));
             }
+        },
+
+        /**
+         * create new product (name, description, release date, discontinued date, rating, price, category, supplier)
+         */
+        onAddProductClick: function(oEvent) {
+            this.getRouter().navTo("form", null)
+        },
+
+        onCategoryUpdateClick: function(){
+            this.oApproveDialog = new Dialog({
+                type: DialogType.Message,
+                title: "Update Category",
+                content: new Input({
+                    id: "nameInput",
+                    value: prevname
+                }),
+                beginButton: new Button({
+                    type: ButtonType.Emphasized,
+                    text: "Submit",
+                    press: function(){
+                        const newName = this.oApproveDialog.getContent()[0].getValue()
+                        oModel.read("/Categories", {
+                            success: function(data){
+                                console.log(data.results)
+                                const isNameFree = !data.results?.find(cat => cat.Name === newName);
+
+                                if(isNameFree){
+                                    this._updateConfirmDialog(prevName, newName, itemPath);
+                                } else{
+                                    console.log("is not free")
+                                    MessageBox.error("Category with that name already exists!", {
+                                        title: "Error"
+                                    })
+                                }
+                                this.oApproveDialog.destroy();
+                            }.bind(this),
+                            error: function (error) {
+                                console.log(error)
+                            }
+                        });
+                    }.bind(this)
+                }),
+                endButhon: new Button({
+                    text: "Cancel",
+                    press: function () {
+                        this.oApproveDialog.destroy();
+                    }.bind(this)
+                })
+                }),
+                this.oApproveDialog.open();
+        },
+
+        _updateConfirmDialog: function(prevName,newName){
+            var oModel = this.getView().getModel();
+            
+            this.oConfirmDialog = new Dialog({
+                    type: DialogType.Message,
+                    title: "Confirmation",
+                    content: new Text({
+                        text: `Are you sure you want to rename category from ${prevName} to ${newName}?`
+                    }),
+                    beginButton: new Button({
+                        type: ButtonType.Accept,
+                        text: "Yes",
+                        press: function(){
+                            var oCat = {"Name": newName}
+                            oModel.update(this.getPath(), oCat, {
+                                merge: true,
+                                success: function () {MessageToast.show("Success!");},
+                                error: function (oError) {MessageToast.show("Something went wrong :c");}
+                            });
+                            this.oConfirmDialog.destroy();
+                        }.bind(this)
+                    }),
+                    endButton: new Button({
+                        text: "No",
+                        type: ButtonType.Reject,
+                        press: function () {
+                            this.oConfirmDialog.destroy();
+                        }.bind(this)
+                    })
+            });
+            this.oConfirmDialog.open();
+        },
+
+        onCategoryUpdateClick1: function(oEvent){
+            var oModel = this.getView().getModel();
+            const itemContext = oEvent.getSource().getBindingContext()
+            const itemPath = itemContext.getPath();
+            const itemObject = itemContext();
+            const prevName = itemObject.Name;
+
+            this.oApproveDialog = new Dialog({
+                type: DialogType.Message,
+                title: "Update",
+                content: new Input({
+                    id: "nameInput",
+                    value: prevname
+                }),
+                beginButton: new Button({
+                    type: ButtonType.Emphasized,
+                    text: "Submit",
+                    press: function() {
+                        const newName = this.oApproveDialog.getContent()[0].getValue()
+                        oModel.read("/Categories", {
+                            success: function(data){
+                                console.log(data.results)
+                                const isNameFree = !data.results?.find(cat => cat.Name === newName);
+
+                                if(isNameFree){
+                                    this._updateConfirmDialog(prevName, newName, itemPath);
+                                } else{
+                                    console.log("is not free")
+                                    MessageBox.error("Category with that name already exists!", {
+                                        title: "Error"
+                                    })
+                                }
+                                this.oApproveDialog.destroy();
+                            }.bind(this),
+                            error: function (error) {
+                                console.log(error)
+                            }
+                        });
+                    }.bind(this)
+                }),
+                endButhon: new Button({
+                    text: "Cancel",
+                    press: function () {
+                        this.oApproveDialog.destroy();
+                    }.bind(this)
+                })
+                }),
+                this.oApproveDialog.open();
+        },
+
+        _updateConfirmDialog1: function(prevName,newName,itemPath){
+            var oModel = this.getView().getModel();
+            
+            this.oConfirmDialog = new Dialog({
+                    type: DialogType.Message,
+                    title: "Confirmation",
+                    content: new Text({
+                        text: `Are you sure you want to rename category from ${prevName} to ${newName}?`
+                    }),
+                    beginButton: new Button({
+                        type: ButtonType.Accept,
+                        text: "Yes",
+                        press: function(){
+                            var oCat = {"Name": newName}
+                            oModel.update(itemPath, oCat, {
+                                merge: true,
+                                success: function () {MessageToast.show("Success!");},
+                                error: function (oError) {MessageToast.show("Something went wrong :c");}
+                            });
+                            this.oConfirmDialog.destroy();
+                        }.bind(this)
+                    }),
+                    endButton: new Button({
+                        text: "No",
+                        type: ButtonType.Reject,
+                        press: function () {
+                            this.oConfirmDialog.destroy();
+                        }.bind(this)
+                    })
+            });
+            this.oConfirmDialog.open();
         }
     });
 
