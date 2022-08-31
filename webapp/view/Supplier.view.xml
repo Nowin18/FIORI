@@ -26,36 +26,10 @@
 <layout:VerticalLayout>
 <m:Label text="Country" />
 <m:Text text="{Address/Country}"/>
-                <items><ObjectListItem
-                        type="Navigation"
-                        press=".onSelectionChange"
-                        title="{Name}"
-                        number="{
-                            path: 'ID',
-                            formatter: '.formatter.numberUnit'
-                        }" >
-                    
-                        <ObjectAttribute active="true" id="deleteId" text="Delete" press=".onDeleteClickP"/>
-                    </ObjectListItem>
-                </items>
 </layout:VerticalLayout>
-    </headerContent>
+</headerContent>
 
 <sections>
-<!-- <items>
-                    <ObjectListItem
-                        type="Navigation"
-                        press=".onSelectionChange"
-                        title="{Name}"
-                        number="{
-                            path: 'ID',
-                            formatter: '.formatter.numberUnit'
-                        }" >
-                    
-                        <ObjectAttribute active="true" id="deleteId" text="Delete" press=".onDeleteClickP"/>
-                    </ObjectListItem>
-                        
-                </items> -->
 <ObjectPageSection titleUppercase="false" title="2014 Goals Plan">
 <subSections>
 <ObjectPageSubSection title="Plan" titleUppercase="false">
@@ -67,6 +41,10 @@
 <m:Text text="Due Nov 21"/>
 <m:Label text="Mentor junior developers" />
 <m:Text text="Due Dec 31 Cascaded"/>
+<m:Label text="Street"/>
+<m:Text text="{Address/Street}"/>
+
+
 </forms:SimpleForm>
 </blocks>
 </ObjectPageSubSection>

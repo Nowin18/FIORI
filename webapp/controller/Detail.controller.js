@@ -2,7 +2,9 @@ sap.ui.define([
     "./BaseController",
     "sap/ui/model/json/JSONModel",
     "../model/formatter",
+    "sap/m/MessageBox",
     "sap/m/library"
+    
 ], function (BaseController, JSONModel, formatter, mobileLibrary) {
     "use strict";
 
@@ -143,7 +145,60 @@ sap.ui.define([
                 }
             });
         },
+         /**
+         * ------------------------------------------------------------------------------------------------------------
+         * DELETE Product
+         */
+        // onDeleteClickP: function(oEvent){
+        //     const clickedItemPath = oEvent.getSource().getBindingContext().getPath()
+        //     var oModel = this.getView().getModel();
+        //         debugger;
+        //     oModel.remove(clickedItemPath, {
+        //         success: function(data){
+        //             MessageBox.success("Product has been deleted!", {
+        //                 title: "Success!"
+        //             })
+        //         },
+        //         error: function(e){
+        //             alert("Error!");
+        //         }
+        //     });
+        // },
+        _onButtonPress: function(oEvent) {
+            
+            
+          //  
+            var sssd = oEvent.getSource().getBindingContext().getPath();
+			var oSource = oEvent.getSource();
+			var oSourceBindingContext = oSource.getBindingContext();
+            var oCtxo = oSourceBindingContext.getDeepPath();
+            var cooto = oSourceBindingContext.getModel().getBindings();
+            var watafaq = oSourceBindingContext.getModel();
+           
+			return new Promise(function(fnResolve, fnReject) {
+				if (oSourceBindingContext) {
+					var oModel = oSourceBindingContext.getModel();
+					 oModel.remove(oSourceBindingContext.getPath() /*oSourceBindingContext.getPath()*/, {
+						success: function() {
+							oModel.refresh();
+							fnResolve();
+						},
+						error: function() {
+							oModel.refresh();
+							fnReject(new Error("remove failed"));
+						}
+					});
+				}
+			}).catch(function(err) {
+				if (err !== undefined) {
+					MessageBox.error(err.message);
+				}
+			});
 
+		},
+
+        /*------------------------------------------------------------------------------------------------------------
+        */
         _onBindingChange: function () {
             var oView = this.getView(),
                 oElementBinding = oView.getElementBinding();

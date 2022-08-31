@@ -28,7 +28,7 @@
                 busyIndicatorDelay="0"
                 id="lineItemsList"
                 width="auto"
-                items="{Products}"
+                items="{path:'/Products'}"
                 updateFinished=".onListUpdateFinished"
                 noDataText="{i18n>detailLineItemTableNoDataText}"
             >
@@ -57,6 +57,7 @@
                     <Column>
                         <Text text="Rating"/>
                     </Column>
+                    <Column></Column>
                
 
                 </columns>
@@ -65,7 +66,7 @@
                         <cells>
                             <ObjectIdentifier
                                 title="{Name}"
-                                text="{ID}"/>
+                                />
                             <ObjectNumber
                                 number="{
                                     path: 'Price',
@@ -73,6 +74,7 @@
                                 }" />
                                 <Text text="{Description}"></Text>
                                 <Text text="{Rating}"></Text>
+                                <Button text="Delete" type="Reject" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="_onButtonPress"/>              
                         </cells>
                     </ColumnListItem>                    
                 </items>

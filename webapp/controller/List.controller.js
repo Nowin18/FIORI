@@ -329,7 +329,7 @@ sap.ui.define([
         onSelectionChange: function (oEvent) {
             var oList = oEvent.getSource(),
                 bSelected = oEvent.getParameter("selected");
-
+            debugger;
             // skip navigation when deselecting an item in multi selection mode
             if (!(oList.getMode() === "MultiSelect" && !bSelected)) {
                 // get the list item, either from the listItem parameter or from the event's source itself (will depend on the device-dependent mode).
@@ -395,21 +395,32 @@ sap.ui.define([
          * ------------------------------------------------------------------------------------------------------------
          * DELETE Product
          */
-        onDeleteClickP: function(oEvent){
-            const clickedItemPath = oEvent.getSource().getBindingContext().getPath()
-            var oModel = this.getView().getModel();
+        onDeleteClickP: function(oEvent) {
 
-            oModel.remove(clickedItemPath, {
-                success: function(data){
-                    MessageBox.success("Product has been deleted!", {
-                        title: "Success!"
-                    })
-                },
-                error: function(e){
-                    alert("Error!");
-                }
-            });
-        },
+			var oSource = oEvent.getSource();
+			var oSourceBindingContext = oSource.getBindingContext();
+
+			return new Promise(function(fnResolve, fnReject) {
+				if (oSourceBindingContext) {
+					var oModel = oSourceBindingContext.getModel();
+					oModel.remove(oSourceBindingContext.getPath(), {
+						success: function() {
+							oModel.refresh();
+							fnResolve();
+						},
+						error: function() {
+							oModel.refresh();
+							fnReject(new Error("remove failed"));
+						}
+					});
+				}
+			}).catch(function(err) {
+				if (err !== undefined) {
+					MessageBox.error(err.message);
+				}
+			});
+
+		},
        
         /**
          * ----------------------------------------------------------------------------------------------------------------
