@@ -169,6 +169,42 @@ sap.ui.define([
                 this.byId("viewSettingsDialog").open(sDialogTab);
             }
         },
+
+        onAddCategoryClick: function() {
+            this.oApproveDialog = new Dialog({
+                type: DialogType.Message,
+                title: "Create category",
+                content: new Input({
+                    id: "nameInput"
+                }),
+                beginButton: new Button({
+                    type: ButtonType.Emphasized,
+                    text: "Submit",
+                    press: function () {
+                        var oCat = {
+                            "ID": Math.floor(Math.random() * 101) + 5,
+                            "Name": this.oApproveDialog.getContent()[0].getValue().length === 0 ? "Default" : this.oApproveDialog()[0].getValue()
+                        }
+                        var oModel = this.getView().getModel();
+
+                        oModel.create("/Categories", oCat, {
+                            success: function () { MessageToast.show("Success!"); },
+                            error: function (oError) { MessageToast.show("Something went wrong!"); }
+                        });
+                        this.oApproveDialog.destroy();
+                    }.bind(this)
+                }),
+                endButton: new Button({
+                    text: "Cancel",
+                    press: function () {
+                        this.oApproveDialog.destroy();
+                    }.bind(this)
+                })
+            });
+
+            this.oApproveDialog.open();
+        },
+
         // Po wcisnieciu update
         onUpdateClick: function(oEvent){
             var oModel = this.getView().getModel();

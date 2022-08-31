@@ -82,7 +82,15 @@
                             press=".onOpenViewSettings"
                             icon="sap-icon://group-2"
                             type="Transparent"/>
+<<<<<<< HEAD
+                        <Button 
+                            id="addCatButton"
+                            press=".onAddCategoryClick"
+                            text="Add category"
+                            type="Accept"/>
+=======
                         
+>>>>>>> 0b5a804d38c9949e2fe290f98121cc4fe27891f7
 
                     </OverflowToolbar>
                 </headerToolbar>
