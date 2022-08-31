@@ -73,7 +73,11 @@
                 "dataSource": "mainService",
                 "preload": true,
                 "settings": {
+<<<<<<< HEAD
+                    "useBatch": false
+=======
                     "useBatch":false
+>>>>>>> 190bc2ebaacb91c4d268b20d89485a07efc9d18f
                 }
             }
         },
@@ -120,6 +124,10 @@
                     "viewLevel": 1,
                     "viewId": "list"
                 },
+                "supp": {
+                    "viewName": "Supplier",
+                    "viewId": "supplier"
+                },
                 "object": {
                     "viewName": "Detail",
                     "viewId": "detail",
@@ -128,7 +136,7 @@
                 },
                 "supp": {
                     "viewName": "Supplier",
-                    "viewID": "supplier"
+                    "viewId": "supplier"
                 },
                 "detailObjectNotFound": {
                     "viewName": "DetailObjectNotFound",

@@ -82,11 +82,15 @@
                             press=".onOpenViewSettings"
                             icon="sap-icon://group-2"
                             type="Transparent"/>
+<<<<<<< HEAD
                         <Button 
                             id="addCatButton"
                             press=".onAddCategoryClick"
                             text="Add category"
                             type="Accept"/>
+=======
+                        
+>>>>>>> 0b5a804d38c9949e2fe290f98121cc4fe27891f7
 
                     </OverflowToolbar>
                 </headerToolbar>
@@ -99,8 +103,15 @@
                             path: 'ID',
                             formatter: '.formatter.numberUnit'
                         }" >
+<<<<<<< HEAD
+                        <ObjectAttribute active="true" id="updateId" text="Change name" press=".onUpdateClick"/>
+                        <ObjectAttribute active="true" id="deleteId" text="Delete" press=".onDeleteClick"/>
+                    </ObjectListItem>
+                        
+=======
                         <ObjectAttribute active="true" id="updateId" text="Change name" press=".onUpdateClick" />
                     </ObjectListItem>
+>>>>>>> 190bc2ebaacb91c4d268b20d89485a07efc9d18f
                 </items>
             </List>
         </semantic:content>

@@ -16,8 +16,12 @@ sap.ui.define([
     "sap/m/MessageToast",
     "sap/m/MessageBox",
     "sap/m/Input"
+<<<<<<< HEAD
+], function (BaseController, JSONModel, Filter, Sorter, FilterOperator, GroupHeaderListItem, Device, Fragment, formatter, Dialog, DialogType, Button, ButtonType, Text, MessageToast, MessageBox, Input) {
+=======
 ], function (BaseController, JSONModel, Filter, Sorter, FilterOperator, GroupHeaderListItem, Device, Fragment, formatter, Dialog, DialogType, Button, ButtonType, Text,
     MessageToast, MessageBox, Input) {
+>>>>>>> 190bc2ebaacb91c4d268b20d89485a07efc9d18f
     "use strict";
 
     return BaseController.extend("projectv2.controller.List", {
@@ -158,7 +162,7 @@ sap.ui.define([
             if (!this.byId("viewSettingsDialog")) {
                 Fragment.load({
                     id: this.getView().getId(),
-                    name: "projectv2.view.ViewSettingsDialog",
+                    name: "grupa1.view.ViewSettingsDialog",
                     controller: this
                 }).then(function(oDialog){
                     // connect dialog to the root view of this component (models, lifecycle)
@@ -406,6 +410,45 @@ sap.ui.define([
         onNavBack: function() {
             // eslint-disable-next-line sap-no-history-manipulation
             history.go(-1);
+        },
+
+        /**
+         * create new category
+         */
+        onAddCategoryClick: function() {
+            this.oApproveDialog = new Dialog({
+                type: DialogType.Message,
+                title: "Create category",
+                content: new Input({
+                    id: "nameInput"
+                }),
+                beginButton: new Button({
+                    type: ButtonType.Emphasized,
+                    text: "Submit",
+                    press: function () {
+                        var oCat ={
+                            "ID": Math.floor(Math.random()*101)+5,
+                            "Name":this.oApproveDialog.getContent()[0].getValue().length === 0 ? "Default": this.oApproveDialog.getContent()[0].getValue()
+                        }
+                        var oModel = this.getView().getModel();
+
+                        oModel.create("/Categories", oCat, {
+                            success: function () { MessageToast.show("Success!"); },
+                            error: function (oError) { MessageToast.show("Something went wrong :c"); }
+                        });
+                        this.oApproveDialog.destroy();
+                    }.bind(this)
+                }),
+                endButton: new Button({
+                    text: "Cancel",
+                    press: function() {
+                        this.oApproveDialog.destroy();
+                    }.bind(this)
+                })
+            });
+
+            this.oApproveDialog.open();
+
         },
 
         /* =========================================================== */

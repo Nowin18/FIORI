@@ -28,6 +28,9 @@
       }
     },
     {
+<<<<<<< HEAD
+      "name": "projectv2-config2",
+=======
       "name": "FIORI-config1",
       "cwd": "${workspaceFolder}",
       "runtimeArgs": [
@@ -55,6 +58,7 @@
     },
     {
       "name": "FIORI-config2",
+>>>>>>> 190bc2ebaacb91c4d268b20d89485a07efc9d18f
       "cwd": "${workspaceFolder}",
       "runtimeArgs": [
         "fiori",
@@ -74,7 +78,11 @@
       "internalConsoleOptions": "openOnSessionStart",
       "outputCapture": "std",
       "env": {
+<<<<<<< HEAD
+        "run.config": "{\"handlerId\":\"fiori_tools\",\"runnableId\":\"/home/user/projects/projectv2\"}",
+=======
         "run.config": "{\"handlerId\":\"fiori_tools\",\"runnableId\":\"/home/user/FIORI\"}",
+>>>>>>> 190bc2ebaacb91c4d268b20d89485a07efc9d18f
         "FIORI_TOOLS_BACKEND_CONFIG": "[{\"path\":\"/V2\",\"url\":\"https://services.odata.org\"}]",
         "FIORI_TOOLS_URL_PARAMS": "sap-ui-xx-viewCache=false"
       }

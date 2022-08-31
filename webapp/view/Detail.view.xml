@@ -7,7 +7,7 @@
     <semantic:SemanticPage
         id="detailPage"
         busy="{detailView>/busy}"
-        busyIndicatorDelay="{detailView>/delay}">
+        busyIndicatorDelay="0">
         <semantic:titleHeading>
             <Title
                 text="{Name}"
@@ -24,12 +24,14 @@
         <semantic:content>
 
             <Table
+                busy="{detailView>/busy}"
+                busyIndicatorDelay="0"
                 id="lineItemsList"
                 width="auto"
                 items="{Products}"
                 updateFinished=".onListUpdateFinished"
                 noDataText="{i18n>detailLineItemTableNoDataText}"
-                busyIndicatorDelay="{detailView>/lineItemTableDelay}">
+            >
                 <headerToolbar>
                     <Toolbar>
                         <Title
@@ -49,6 +51,14 @@
                         hAlign="End">
                         <Text text="{i18n>detailLineItemTableUnitNumberColumn}"/>
                     </Column>
+                    <Column>
+                        <Text text="Description"/>
+                    </Column>
+                    <Column>
+                        <Text text="Rating"/>
+                    </Column>
+               
+
                 </columns>
                 <items>
                     <ColumnListItem press=".handleRowPress" type="Active">
@@ -62,7 +72,11 @@
                                     formatter: '.formatter.currencyValue'
                                 }" />
                                 <Text text="{Description}"></Text>
+<<<<<<< HEAD
+                                <Text text="{Rating}"></Text>
+=======
                                 <Text text="{Rating}"></Text>                                                     
+>>>>>>> 190bc2ebaacb91c4d268b20d89485a07efc9d18f
                         </cells>
                     </ColumnListItem>                    
                 </items>
