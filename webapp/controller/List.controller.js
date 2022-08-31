@@ -372,6 +372,50 @@ sap.ui.define([
         },
 
         /**
+         * -----------------------------------------------------------------------------------------------------------
+         * DELETE CATEGORY
+         */
+        onDeleteClick: function(oEvent){
+            const clickedItemPath = oEvent.getSource().getBindingContext().getPath()
+            var oModel = this.getView().getModel();
+
+            oModel.remove(clickedItemPath, {
+                success: function(data){
+                    MessageBox.success("Category has been deleted!", {
+                        title: "Success!"
+                    })
+                },
+                error: function(e){
+                    alert("Error!");
+                }
+            });
+        },
+
+        /**
+         * ------------------------------------------------------------------------------------------------------------
+         * DELETE Product
+         */
+        onDeleteClickP: function(oEvent){
+            const clickedItemPath = oEvent.getSource().getBindingContext().getPath()
+            var oModel = this.getView().getModel();
+
+            oModel.remove(clickedItemPath, {
+                success: function(data){
+                    MessageBox.success("Product has been deleted!", {
+                        title: "Success!"
+                    })
+                },
+                error: function(e){
+                    alert("Error!");
+                }
+            });
+        },
+       
+        /**
+         * ----------------------------------------------------------------------------------------------------------------
+         */
+
+        /**
          * create new category
          */
         onAddCategoryClick: function() {

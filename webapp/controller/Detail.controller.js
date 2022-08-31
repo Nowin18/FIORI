@@ -86,7 +86,6 @@ sap.ui.define([
         
         handleRowPress: function(oEvent){
             this.getModel('detailView').setProperty("/busy", true);
-            debugger;
             const clickedItem = oEvent.getSource().getBindingContext().getObject()
         
             this.getRouter().navTo("supp", {
