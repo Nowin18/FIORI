@@ -50,11 +50,16 @@
                         <Text text="{i18n>detailLineItemTableUnitNumberColumn}"/>
                     </Column>
                     <Column>
-                    <Text text="CHUJ"></Text>
+                        <Text text="Description"/>
                     </Column>
+                    <Column>
+                        <Text text="Rating"/>
+                    </Column>
+               
+
                 </columns>
                 <items>
-                    <ColumnListItem>
+                    <ColumnListItem press=".handleRowPress" type="Active">
                         <cells>
                             <ObjectIdentifier
                                 title="{Name}"
@@ -64,6 +69,8 @@
                                     path: 'Price',
                                     formatter: '.formatter.currencyValue'
                                 }" />
+                                <Text text="{Description}"></Text>
+                                <Text text="{Rating}"></Text>
                         </cells>
                     </ColumnListItem>
                 </items>

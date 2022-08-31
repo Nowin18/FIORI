@@ -244,7 +244,7 @@ sap.ui.define([
              @param {sap.ui.base.Event} oEvent the list selectionChange event
          * @public
             */
-           onDeleteClick: function(oEvent){
+      onDeleteClick: function(oEvent){
                const clickedItemPath = oEvent.getSource().getBindingContext().getPatch();
                var oModel = this.getView().getModel();
 

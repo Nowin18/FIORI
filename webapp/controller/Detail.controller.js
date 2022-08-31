@@ -2,8 +2,24 @@ sap.ui.define([
     "./BaseController",
     "sap/ui/model/json/JSONModel",
     "../model/formatter",
+    "sap/ui/model/Filter",
+    "sap/ui/model/Sorter",
+    "sap/ui/model/FilterOperator",
+    "sap/m/GroupHeaderListItem",
+    "sap/ui/Device",
+    "sap/ui/core/Fragment",
+    "../model/formatter",
+    "sap/m/Dialog",
+    "sap/m/DialogType", 
+    "sap/m/Button", 
+    "sap/m/ButtonType", 
+    "sap/m/Text", 
+    "sap/m/MessageToast", 
+    "sap/m/MessageBox", 
+    "sap/m/Input",
     "sap/m/library"
-], function (BaseController, JSONModel, formatter, mobileLibrary) {
+], function (BaseController, JSONModel, formatter, mobileLibrary, Filter, Sorter, FilterOperator, GroupHeaderListItem, Device, Fragment, Dialog, DialogType, Button, ButtonType, Text, MessageToast, MessageBox, Input) {
+
     "use strict";
 
     // shortcut for sap.m.URLHelper
@@ -33,6 +49,7 @@ sap.ui.define([
 
             this.getOwnerComponent().getModel().metadataLoaded().then(this._onMetadataLoaded.bind(this));
         },
+       
 
         /* =========================================================== */
         /* event handlers                                              */
@@ -42,6 +59,7 @@ sap.ui.define([
          * Event handler when the share by E-Mail button has been clicked
          * @public
          */
+         
         onSendEmailPress: function () {
             var oViewModel = this.getModel("detailView");
 
@@ -58,6 +76,19 @@ sap.ui.define([
          * @param {object} oEvent an event containing the total number of items in the list
          * @private
          */
+        handleRowPress: function(oEvent){
+
+            const clickedItem = oEvent.getSource().getBindingContext().getObject()
+
+            
+
+            this.getRouter().navTo("supp", { 
+
+            objectId : clickedItem.ID
+
+            })
+
+            },
         onListUpdateFinished: function (oEvent) {
             var sTitle,
                 iTotalItems = oEvent.getParameter("total"),

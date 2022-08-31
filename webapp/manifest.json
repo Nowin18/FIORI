@@ -107,6 +107,11 @@
                         "list",
                         "object"
                     ]
+                },
+                {
+                    "pattern": "Products/{objectId}/Supplier",
+                    "name": "supp",
+                    "target": "supp"
                 }
             ],
             "targets": {
@@ -114,6 +119,10 @@
                     "viewName": "List",
                     "viewLevel": 1,
                     "viewId": "list"
+                },
+                "supp": {
+                    "viewName": "Supplier",
+                    "viewId": "supplier"
                 },
                 "object": {
                     "viewName": "Detail",
