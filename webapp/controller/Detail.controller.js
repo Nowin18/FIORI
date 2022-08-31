@@ -37,6 +37,13 @@ sap.ui.define([
         /* =========================================================== */
         /* event handlers                                              */
         /* =========================================================== */
+        handleRowPress: function(oEvent){
+            const clickedItem = oEvent.getSource().getBindingContext().getObject()
+
+            this.getRouter().navTo("supp", {
+                objectId : clickedItem.ID
+            })
+        },
 
         /**
          * Event handler when the share by E-Mail button has been clicked

@@ -73,7 +73,11 @@
                 "dataSource": "mainService",
                 "preload": true,
                 "settings": {
+<<<<<<< HEAD
                     "useBatch": false
+=======
+                    "useBatch":false
+>>>>>>> 190bc2ebaacb91c4d268b20d89485a07efc9d18f
                 }
             }
         },
@@ -129,6 +133,10 @@
                     "viewId": "detail",
                     "viewLevel": 1,
                     "controlAggregation": "midColumnPages"
+                },
+                "supp": {
+                    "viewName": "Supplier",
+                    "viewId": "supplier"
                 },
                 "detailObjectNotFound": {
                     "viewName": "DetailObjectNotFound",

@@ -72,9 +72,13 @@
                                     formatter: '.formatter.currencyValue'
                                 }" />
                                 <Text text="{Description}"></Text>
+<<<<<<< HEAD
                                 <Text text="{Rating}"></Text>
+=======
+                                <Text text="{Rating}"></Text>                                                     
+>>>>>>> 190bc2ebaacb91c4d268b20d89485a07efc9d18f
                         </cells>
-                    </ColumnListItem>
+                    </ColumnListItem>                    
                 </items>
             </Table>
         </semantic:content>

@@ -16,7 +16,12 @@ sap.ui.define([
     "sap/m/MessageToast",
     "sap/m/MessageBox",
     "sap/m/Input"
+<<<<<<< HEAD
 ], function (BaseController, JSONModel, Filter, Sorter, FilterOperator, GroupHeaderListItem, Device, Fragment, formatter, Dialog, DialogType, Button, ButtonType, Text, MessageToast, MessageBox, Input) {
+=======
+], function (BaseController, JSONModel, Filter, Sorter, FilterOperator, GroupHeaderListItem, Device, Fragment, formatter, Dialog, DialogType, Button, ButtonType, Text,
+    MessageToast, MessageBox, Input) {
+>>>>>>> 190bc2ebaacb91c4d268b20d89485a07efc9d18f
     "use strict";
 
     return BaseController.extend("projectv2.controller.List", {
@@ -168,6 +173,94 @@ sap.ui.define([
             } else {
                 this.byId("viewSettingsDialog").open(sDialogTab);
             }
+        },
+        // Po wcisnieciu update
+        onUpdateClick: function(oEvent){
+            var oModel = this.getView().getModel();
+
+            const clickedItemContext = oEvent.getSource().getBindingContext()
+            const clickedItemPath = clickedItemContext.getPath();
+            const clickedItemObject = clickedItemContext.getObject();
+            const prevName = clickedItemObject.Name;
+
+            this.oApproveDialog = new Dialog({
+                type: DialogType.Message,
+                title: "Update",
+                content: new Input({
+                    id: "nameInput",
+                    value: prevName
+                }),
+                beginButton: new Button({
+                    type: ButtonType.Emphasized,
+                    text: "Submit",
+                    press: function () {
+                        const newName = this.oApproveDialog.getContent()[0].getValue()
+                        oModel.read("/Categories", {
+                            success: function (data) {
+                                console.log(data.results)
+                                // console.log(!data.results?.find(c => c.Name == newName))
+                                const isNameFree = !data.results?.find(cat => cat.Name === newName);
+
+                                if (isNameFree){
+                                    this._updateConfirmDialog(prevName, newName, clickedItemPath);                                
+                                } else {
+                                    console.log("is not free")
+                                    MessageBox.error("Category with that name already exists!", {
+                                        title: "Error"
+                                    })
+                                }
+                                this.oApproveDialog.destroy();
+                            }.bind(this),
+                            error: function (error) {
+                                console.log(error)
+                            }
+                        });
+
+                    }.bind(this)
+                }),
+                endButton: new Button({
+                    text: "Cancel",
+                    press: function () {
+                        this.oApproveDialog.destroy();
+                    }.bind(this)
+                })
+            });
+
+            this.oApproveDialog.open();
+        },
+        // Potwierdzenie update
+        _updateConfirmDialog: function(prevName, newName, clickedItemPath){
+            var oModel = this.getView().getModel();
+
+            this.oConfirmDialog = new Dialog({
+                type: DialogType.Message,
+                title: "Confirmation",
+                content: new Text({
+                    text: 'Are you sure you want to rename category from ${prevName} to ${newName}?'
+                }),
+                beginButton: new Button({
+                    type: ButtonType.Accept,
+                    text: "Yes",
+                    press: function (){                    
+                        // console.log(this.oApproveDialog.getContent()[0].getValue())
+                        var oCat = {"Name": newName}
+                        oModel.update(clickedItemPath, oCat, {
+                            merge: true, /* if set to true: PATCHE/MERGE */
+                            success: function () { MessageToast.show("Success!"); },
+                            error: function (oError) { MessageToast.show("Something went wrong!"); }
+                        });
+                        this.oConfirmDialog.destroy();
+                    }.bind(this)
+                }),
+                endButton: new Button({
+                    text: "No",
+                    type: ButtonType.Reject,
+                    press: function () {
+                        this.oConfirmDialog.destroy();
+                    }.bind(this)
+                })
+            });
+        this.oConfirmDialog.open();
         },
 
         /**
