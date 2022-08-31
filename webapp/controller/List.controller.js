@@ -16,12 +16,7 @@ sap.ui.define([
     "sap/m/MessageToast",
     "sap/m/MessageBox",
     "sap/m/Input"
-<<<<<<< HEAD
 ], function (BaseController, JSONModel, Filter, Sorter, FilterOperator, GroupHeaderListItem, Device, Fragment, formatter, Dialog, DialogType, Button, ButtonType, Text, MessageToast, MessageBox, Input) {
-=======
-], function (BaseController, JSONModel, Filter, Sorter, FilterOperator, GroupHeaderListItem, Device, Fragment, formatter, Dialog, DialogType, Button, ButtonType, Text,
-    MessageToast, MessageBox, Input) {
->>>>>>> 190bc2ebaacb91c4d268b20d89485a07efc9d18f
     "use strict";
 
     return BaseController.extend("projectv2.controller.List", {
