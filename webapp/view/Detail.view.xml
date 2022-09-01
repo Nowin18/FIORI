@@ -8,19 +8,12 @@
         id="detailPage"
         busy="{detailView>/busy}"
         busyIndicatorDelay="0">
-        <semantic:titleHeading>
+        <semantic:titleHeading >
             <Title
                 text="{Name}"
                 level="H2"/>
         </semantic:titleHeading>
-        <semantic:headerContent>
-            <ObjectAttribute title="{i18n>priceTitle}"/>
-            <ObjectNumber
-                number="{
-                    path: 'ID',
-                    formatter: '.formatter.numberUnit'
-                }" />
-        </semantic:headerContent>
+       
         <semantic:content>
 
             <Table
@@ -28,7 +21,8 @@
                 busyIndicatorDelay="0"
                 id="lineItemsList"
                 width="auto"
-                items="{path:'/Products'}"
+                items= "{Products}"
+                 path="/Products"
                 updateFinished=".onListUpdateFinished"
                 noDataText="{i18n>detailLineItemTableNoDataText}"
             >
@@ -74,37 +68,15 @@
                                 }" />
                                 <Text text="{Description}"></Text>
                                 <Text text="{Rating}"></Text>
-                                <Button text="Delete" type="Reject" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="_onButtonPress"/>              
+                                <Button text="Delete" type="Reject" icon="sap-icon://delete" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="onDelete"/>              
                         </cells>
                     </ColumnListItem>                    
                 </items>
             </Table>
         </semantic:content>
         <!--Semantic ShareMenu Buttons-->
-        <semantic:sendEmailAction>
-            <semantic:SendEmailAction
-                id="shareEmail"
-                press=".onSendEmailPress"/>
-        </semantic:sendEmailAction>
+        
 
-        <semantic:closeAction>
-            <semantic:CloseAction
-                    id="closeColumn"
-                    press=".onCloseDetailPress"/>
-        </semantic:closeAction>
-
-        <semantic:fullScreenAction>
-            <semantic:FullScreenAction
-                    id="enterFullScreen"
-                    visible="{= !${device>/system/phone} &amp;&amp; !${appView>/actionButtonsInfo/midColumn/fullScreen}}"
-                    press=".toggleFullScreen"/>
-        </semantic:fullScreenAction>
-        <semantic:exitFullScreenAction>
-            <semantic:ExitFullScreenAction
-                    id="exitFullScreen"
-                    visible="{= !${device>/system/phone} &amp;&amp; ${appView>/actionButtonsInfo/midColumn/fullScreen}}"
-                    press=".toggleFullScreen"/>
-        </semantic:exitFullScreenAction>
 
     </semantic:SemanticPage>
 

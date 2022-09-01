@@ -3,7 +3,6 @@
     xmlns="sap.m"
     xmlns:semantic="sap.f.semantic"
     xmlns:mvc="sap.ui.core.mvc">
-
     <semantic:SemanticPage
         id="listPage"
         preserveHeaderStateOnScroll="true"
@@ -35,7 +34,6 @@
                 growingScrollToLoad="true"
                 updateFinished=".onUpdateFinished"
                 selectionChange=".onSelectionChange">
-
                 <infoToolbar>
                     <Toolbar
                         active="true"
@@ -46,17 +44,17 @@
                             id="filterBarLabel"
                             text="{listView>/filterBarLabel}"
                             level="H3"/>
+                            
                     </Toolbar>
                 </infoToolbar>
-
                 <headerToolbar>
                     <OverflowToolbar>
                         <SearchField
                             id="searchField"
-                            showRefreshButton="true"
+                            showRefreshButton="false"
                             tooltip="{i18n>listSearchTooltip}"
                             search=".onSearch"
-                            width="auto">
+                            width="90%">
                             <layoutData>
                                 <OverflowToolbarLayoutData
                                     minWidth="150px"
@@ -66,31 +64,12 @@
                             </layoutData>
                         </SearchField>
                         <ToolbarSpacer/>
-                        <Button
-                            id="sortButton"
-                            press=".onOpenViewSettings"
-                            icon="sap-icon://sort"
-                            type="Transparent"/>
-
-                        <Button
-                            id="filterButton"
-                            press=".onOpenViewSettings"
-                            icon="sap-icon://filter"
-                            type="Transparent"/>
-                        <Button
-                            id="groupButton"
-                            press=".onOpenViewSettings"
-                            icon="sap-icon://group-2"
-                            type="Transparent"/>
-<<<<<<< HEAD
                         <Button 
                             id="addCatButton"
                             press=".onAddCategoryClick"
                             text="Add category"
+                            icon="sap-icon://add"
                             type="Accept"/>
-=======
-                        
->>>>>>> 0b5a804d38c9949e2fe290f98121cc4fe27891f7
 
                     </OverflowToolbar>
                 </headerToolbar>
@@ -103,7 +82,7 @@
                             path: 'ID',
                             formatter: '.formatter.numberUnit'
                         }" >
-                        <ObjectAttribute active="true" id="updateId" text="Change name" press=".onUpdateClick"/>
+                      <ObjectAttribute active="true" id="updateId" text="Change name" press=".onUpdateClick"/>
                         <ObjectAttribute active="true" id="deleteId" text="Delete" press=".onDeleteClick"/>
                     </ObjectListItem>
                         

@@ -17,7 +17,7 @@
         },
         "dataSources": {
             "mainService": {
-                "uri": "/V2/(S(v5ztkz2pbusmlabqqvrk3vu0))/OData/OData.svc/",
+                "uri": "/V2/(S(4owwcrhy54zcnbx3xvgtrkg4))/OData/OData.svc/",
                 "type": "OData",
                 "settings": {
                     "annotations": [],
@@ -101,11 +101,11 @@
                     "target": "list"
                 },
                 {
-                    "pattern": "Categories/{objectId}",
+                    "pattern": "Categories/{objectId}", 
                     "name": "object",
                     "target": [
-                        "list",
-                        "object"
+                         "list",
+                         "object"
                     ]
                 },
                 {

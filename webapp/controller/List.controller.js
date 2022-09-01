@@ -365,9 +365,10 @@ sap.ui.define([
         onSelectionChange: function (oEvent) {
             var oList = oEvent.getSource(),
                 bSelected = oEvent.getParameter("selected");
-            debugger;
+            
             // skip navigation when deselecting an item in multi selection mode
             if (!(oList.getMode() === "MultiSelect" && !bSelected)) {
+                
                 // get the list item, either from the listItem parameter or from the event's source itself (will depend on the device-dependent mode).
                 this._showDetail(oEvent.getParameter("listItem") || oEvent.getSource());
             }
@@ -439,6 +440,7 @@ sap.ui.define([
 			return new Promise(function(fnResolve, fnReject) {
 				if (oSourceBindingContext) {
 					var oModel = oSourceBindingContext.getModel();
+                
 					oModel.remove(oSourceBindingContext.getPath(), {
 						success: function() {
 							oModel.refresh();
@@ -533,6 +535,7 @@ sap.ui.define([
             var bReplace = !Device.system.phone;
             // set the layout property of FCL control to show two columns
             this.getModel("appView").setProperty("/layout", "TwoColumnsMidExpanded");
+    
             this.getRouter().navTo("object", {
                 objectId : oItem.getBindingContext().getProperty("ID")
             }, bReplace);
