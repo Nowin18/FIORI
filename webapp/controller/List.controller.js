@@ -170,40 +170,54 @@ sap.ui.define([
             }
         },
 
-        onAddCategoryClick: function() {
+       
+        onAddCategoryClick: function() { 
             this.oApproveDialog = new Dialog({
-                type: DialogType.Message,
-                title: "Create category",
-                content: new Input({
-                    id: "nameInput"
-                }),
-                beginButton: new Button({
-                    type: ButtonType.Emphasized,
-                    text: "Submit",
-                    press: function () {
-                        var oCat = {
-                            "ID": Math.floor(Math.random() * 101) + 5,
-                            "Name": this.oApproveDialog.getContent()[0].getValue().length === 0 ? "Default" : this.oApproveDialog()[0].getValue()
-                        }
-                        var oModel = this.getView().getModel();
+             type: DialogType.Message, 
+            title: "Create category", 
+            content:[
+            new sap.m.Label({text:"Name"}),
+            new sap.m.Input({id: "nameInput"  })
+                    ],
+            beginButton: new Button({
+             type: ButtonType.Emphasized, 
+            text: "Submit", 
+            press: function () {
+           
+            var oModel = this.getView().getModel();
+            var oEntry = {};
+            var that = this;
 
-                        oModel.create("/Categories", oCat, {
-                            success: function () { MessageToast.show("Success!"); },
-                            error: function (oError) { MessageToast.show("Something went wrong!"); }
-                        });
-                        this.oApproveDialog.destroy();
-                    }.bind(this)
-                }),
-                endButton: new Button({
-                    text: "Cancel",
-                    press: function () {
-                        this.oApproveDialog.destroy();
-                    }.bind(this)
-                })
+            oModel.read("/Categories",{
+            sorters:  [new sap.ui.model.Sorter("ID",true)],
+            success: function(odata){
+                oEntry.ID = odata.results[0].ID + 1;
+                
+                var oCat = {
+                    "ID": oEntry.ID,
+                    "Name": that.oApproveDialog.getContent()[1].getValue().length === 0 ? "Default" : that.oApproveDialog.getContent()[1].getValue() 
+                    } ;
+
+                    oModel.create("/Categories", oCat, {
+                    success: function () { MessageToast.show("Success!");  
+                    that.oApproveDialog.destroy()},
+                   error: function (oError) { MessageToast.show("Something went wrong!"); }
+                   });
+            }
+        });
+            }.bind(this)
+             }), 
+            endButton: new Button ({
+             text: "Cancel", 
+            press: function () {
+             this .oApproveDialog.destroy();
+            }.bind(this)
+            })
             });
+            this .oApproveDialog.open();
+            },
 
-            this.oApproveDialog.open();
-        },
+
 
         // Po wcisnieciu update
         onUpdateClick: function(oEvent){
@@ -467,41 +481,7 @@ sap.ui.define([
         /**
          * create new category
          */
-        onAddCategoryClick: function() {
-            this.oApproveDialog = new Dialog({
-                type: DialogType.Message,
-                title: "Create category",
-                content: new Input({
-                    id: "nameInput"
-                }),
-                beginButton: new Button({
-                    type: ButtonType.Emphasized,
-                    text: "Submit",
-                    press: function () {
-                        var oCat ={
-                            "ID": Math.floor(Math.random()*101)+5,
-                            "Name":this.oApproveDialog.getContent()[0].getValue().length === 0 ? "Default": this.oApproveDialog.getContent()[0].getValue()
-                        }
-                        var oModel = this.getView().getModel();
-
-                        oModel.create("/Categories", oCat, {
-                            success: function () { MessageToast.show("Success!"); },
-                            error: function (oError) { MessageToast.show("Something went wrong :c"); }
-                        });
-                        this.oApproveDialog.destroy();
-                    }.bind(this)
-                }),
-                endButton: new Button({
-                    text: "Cancel",
-                    press: function() {
-                        this.oApproveDialog.destroy();
-                    }.bind(this)
-                })
-            });
-
-            this.oApproveDialog.open();
-
-        },
+       
 
         /* =========================================================== */
         /* begin: internal methods                                     */
