@@ -5,7 +5,7 @@
     xmlns:forms="sap.ui.layout.form" controllerName="projectv2.controller.Supplier" height="100%">
     <ObjectPageLayout id="ObjectPageLayout" upperCaseAnchorBar="false" showAnchorBar="true">
         <headerTitle>
-            <ObjectPageHeader id="headerForTest" objectTitle="{Name}" objectSubtitle="ID: {ID}">
+            <ObjectPageHeader id="headerForTest"  objectTitle="{Name}" objectSubtitle="ID: {ID}">
             <actions>
 					<ObjectPageHeaderActionButton id="BackButton" icon="sap-icon://nav-back" text="Back" press="onPressBack"/>
             </actions>            
@@ -21,15 +21,16 @@
 <ObjectPageSubSection title="Details" titleUppercase="false">
 <blocks>
 <forms:SimpleForm editable="false" layout="ColumnLayout">
-<m:Label text="Description "/>
+<m:Label design="Bold" text="Description "/>
 <m:Text text="{Description}" />
-<m:Label text="Released date " />
+<m:Label design="Bold" text="Released date " />
 <m:Text text=" {ReleaseDate}" />
 
-<m:Label text="Rating" />
-<m:Text text=" {Rating}" />
-<m:Label text="Price "/>
-<m:Text text="{Price}" />
+<m:Label design="Bold" text="Rating" />
+<m:RatingIndicator id="rating" maxValue="5" class="sapUiSmallMarginBottom" value="{Rating}" editable="false" tooltip="Rating Tooltip" iconSize="15px"/>
+<m:Label design="Bold" text="Price "/>
+<m:Text text="{Price} $"  />
+
 
 
 
