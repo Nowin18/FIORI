@@ -1,0 +1,45 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.uxap"
+    xmlns:layout="sap.ui.layout"
+    xmlns:m="sap.m"
+    xmlns:forms="sap.ui.layout.form" controllerName="projectv2.controller.Supplier" height="100%">
+    <ObjectPageLayout id="ObjectPageLayout" upperCaseAnchorBar="false" showAnchorBar="true">
+        <headerTitle>
+            <ObjectPageHeader id="headerForTest" objectTitle="{Name}" objectSubtitle="ID: {ID}">
+            <actions>
+					<ObjectPageHeaderActionButton id="BackButton" icon="sap-icon://nav-back" text="Back" press="onPressBack"/>
+            </actions>            
+            </ObjectPageHeader>
+        </headerTitle>
+        <headerContent>
+
+</headerContent>
+
+<sections>
+<ObjectPageSection titleUppercase="false" title="2014 Goals Plan">
+<subSections>
+<ObjectPageSubSection title="Details" titleUppercase="false">
+<blocks>
+<forms:SimpleForm editable="false" layout="ColumnLayout">
+<m:Label text="Description "/>
+<m:Text text="{Description}" />
+<m:Label text="Released date " />
+<m:Text text=" {ReleaseDate}" />
+
+<m:Label text="Rating" />
+<m:Text text=" {Rating}" />
+<m:Label text="Price "/>
+<m:Text text="{Price}" />
+
+
+
+
+
+</forms:SimpleForm>
+</blocks>
+</ObjectPageSubSection>
+</subSections>
+</ObjectPageSection>
+</sections>
+</ObjectPageLayout>
+</mvc:View>
