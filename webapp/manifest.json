@@ -7,6 +7,21 @@
         "applicationVersion": {
             "version": "0.0.1"
         },
+        "crossNavigation": {
+            "inbounds": {
+                "intent1": {
+                    "signature": {
+                        "parameters": {},
+                        "additionalParameters": "allowed"
+                    },
+                    "semanticObject": "master",
+                    "action": "show",
+                    "title": "{{appTitle}}",
+                    "info": "{{appDescription}}",
+                    "icon": "sap-icon://account"
+                }
+            }
+        },
         "title": "{{appTitle}}",
         "description": "{{appDescription}}",
         "resources": "resources.json",
@@ -17,7 +32,7 @@
         },
         "dataSources": {
             "mainService": {
-                "uri": "/V2/(S(4owwcrhy54zcnbx3xvgtrkg4))/OData/OData.svc/",
+                "uri": "/V2/(S(cz121y4n4nnnoscv3gyslqa3))/OData/OData.svc/",
                 "type": "OData",
                 "settings": {
                     "annotations": [],
@@ -101,11 +116,11 @@
                     "target": "list"
                 },
                 {
-                    "pattern": "Categories/{objectId}", 
+                    "pattern": "Categories/{objectId}",
                     "name": "object",
                     "target": [
-                         "list",
-                         "object"
+                        "list",
+                        "object"
                     ]
                 },
                 {
@@ -129,10 +144,6 @@
                     "viewId": "detail",
                     "viewLevel": 1,
                     "controlAggregation": "midColumnPages"
-                },
-                "supp": {
-                    "viewName": "Supplier",
-                    "viewId": "supplier"
                 },
                 "detailObjectNotFound": {
                     "viewName": "DetailObjectNotFound",

@@ -3,16 +3,30 @@
   "authenticationMethod": "route",
   "routes": [
     {
+      "source": "^/GrandsDataService.svc/(.*)$",
+      "target": "/GrandsDataService.svc/$1",
+      "destination": "Grants",
+      "authenticationType": "none",
+      "csrfProtection": false
+    },
+    {
+      "source": "^/V2/(.*)$",
+      "target": "/V2/$1",
+      "authenticationType": "none",
+      "destination": "Northwind",
+      "csrfProtection": false
+    },
+    {
       "source": "^/resources/(.*)$",
       "target": "/resources/$1",
       "authenticationType": "none",
       "destination": "ui5"
     },
     {
-      "source": "^/test-resources/(.*)$",
-      "target": "/test-resources/$1",
-      "authenticationType": "none",
-      "destination": "ui5"
+        "source": "^/test-resources/(.*)$",
+        "target": "/test-resources/$1",
+        "authenticationType": "none",
+        "destination": "ui5"   
     },
     {
       "source": "^(.*)$",
