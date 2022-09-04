@@ -197,9 +197,10 @@ sap.ui.define([
                     "ID": oEntry.ID,
                     "Name": that.oApproveDialog.getContent()[1].getValue().length === 0 ? "Default" : that.oApproveDialog.getContent()[1].getValue() 
                     } ;
-
+                    oModel.setUseBatch(false);
                     oModel.create("/Categories", oCat, {
                     success: function () { MessageToast.show("Success!");  
+                    oModel.setUseBatch(true);
                     that.oApproveDialog.destroy()},
                    error: function (oError) { MessageToast.show("Something went wrong!"); }
                    });
