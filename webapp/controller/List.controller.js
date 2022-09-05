@@ -170,7 +170,7 @@ sap.ui.define([
             }
         },
 
-       
+       // CREATE CATEGORY BUTTON
         onAddCategoryClick: function() { 
             this.oApproveDialog = new Dialog({
              type: DialogType.Message, 
